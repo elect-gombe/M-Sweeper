@@ -1,0 +1,3 @@
+#! /bin/sh
+echo "#include <stdio.h>\n#include <signal.h>\n#include <unistd.h>\n#include <string.h>\n\nvoid s(void){}\n\nint main(int argc,char **argv){\n  int i,col,x,len;\n\n  signal(SIGINT,s);\n  len=strlen(argv[2]);
+  col=atoi(argv[1]);\n  printf(\"\\\033[2J\");\n\n  for(i=-len;i<=col;i++){\n    printf(\"\\\033[1;1H\");\n    for(x=0;x<col;x++){\n      if(x-i>=0){\n        if(argv[2][x-i]=='\\\0')break;\n        printf(\"%c\",argv[2][x-i]);\n      }\n      else\n        printf(\" \");\n    }\n    printf(\"\\\n\");\n    usleep(100000);\n  }\n}" > hahhahha.c ; cc hahhahha.c ;stty -echo -icanon min 1 time 0; ./a.out $(tput cols) "==[.[][][].][.[][][] .]";stty echo -icanon min 1 time 0;rm hahhahha.c a.out -f
